@@ -2,6 +2,7 @@ from .indices import sp500
 import errno    
 import os
 import time
+import pandas as pd
 
 try:
     # py3
@@ -12,7 +13,17 @@ except ImportError:
     from urllib2 import Request, urlopen
     from urllib import urlencode
 
+def today_bday():
+    """"Return True if `now` falls within a business day"""
+    return is_bday(pd.Timestamp.utcnow())
 
+def is_bday(now):
+    """
+    now : pandas.tslib.Timestamp
+        Return True if `now` is during a business day
+    """
+    closest_bday = now - pd.tseries.offsets.BDay() + pd.tseries.offsets.BDay()
+    return now == closest_bday
 
 def mkdir_p(path):
     try:
