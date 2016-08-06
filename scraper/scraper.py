@@ -11,7 +11,7 @@ from . import utils
 # TODO: move this to config.py
 PKG_NAME = __name__.split(u'.')[0]
 #data_prefix = os.environ['HOME'] + '/Dropbox/projects/financial/data_scraper/data'
-data_prefix = utils.resource_path('', pkg_name = PKG_NAME)
+data_prefix = utils.resource_path('../data/', pkg_name = PKG_NAME)
 print(data_prefix)
 
 try:
