@@ -1,0 +1,20 @@
+uri:/instrument/1.0/MMV/chartdata;type=quote;range=1d/csv
+ticker:mmv
+Company-Name:Eaton Vance Massachusetts Munic
+Exchange-Name:ASE
+unit:MIN
+timezone:EDT
+currency:USD
+gmtoffset:-14400
+previous_close:15.0900
+Timestamp:1469107800,1469131200
+labels:1469109600,1469113200,1469116800,1469120400,1469124000,1469127600,1469131200
+values:Timestamp,close,high,low,open,volume
+close:15.0900,15.2500
+high:15.0900,15.2500
+low:15.0900,15.2500
+open:15.0900,15.2500
+volume:200,1500
+1469111216,15.2500,15.2500,15.2500,15.2500,1500
+1469111320,15.2500,15.2500,15.2500,15.2500,1500
+1469122149,15.0900,15.0900,15.0900,15.0900,200

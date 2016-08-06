@@ -4,10 +4,15 @@ import time
 
 import pandas as pd
 import os
-from StringIO import StringIO
+from io import StringIO
+
+from . import utils
 
 # TODO: move this to config.py
-data_prefix = os.environ['HOME'] + '/Dropbox/projects/financial/data_scraper/data'
+PKG_NAME = __name__.split(u'.')[0]
+#data_prefix = os.environ['HOME'] + '/Dropbox/projects/financial/data_scraper/data'
+data_prefix = utils.resource_path('', pkg_name = PKG_NAME)
+print(data_prefix)
 
 try:
     # py3
@@ -57,25 +62,29 @@ def autodl_symbol(symbol):
         f.write(_request(symbol))
     return path
 
-
-def read_csv(path):
-    """
-    Load data from a single csv file, corresponding to
-    prices for one ticker during a single trading day.
-    """
-    with open(path) as f:
-        full = f.read()
-    header = 'Timestamp,close,high,low,open,volume\n'
-    return header + '\n'.join(full.split('\n')[17:])
-
 class StockDay:
+    """
+    Structure for accessing stock data associated with a single CSV
+    file.
+    """
     def __init__(self, path):
         self.time = self.path_to_timestamp(path)
         self.ticker = self.path_to_ticker(path)
         self.path = path
         
     def load(self):
-        return pd.read_csv(StringIO(read_csv(self.path)))
+        """
+        Load data from a single csv file, corresponding to prices for
+        one ticker during a single trading day.
+
+        Returns a DataFrame instance with these columns:
+            Timestamp,close,high,low,open,volume
+        """
+        with open(self.path) as f:
+            full = f.read()
+        header = 'Timestamp,close,high,low,open,volume\n'
+        csv_str = header + '\n'.join(full.split('\n')[17:])
+        return pd.read_csv(StringIO(csv_str))
 
     @staticmethod
     def path_to_timestamp(path):
@@ -88,23 +97,30 @@ class StockDay:
         fname = os.path.basename(path)
         return fname.split('_')[1]
     
-def merge_stockdays(stockdays):
+def stockdays_to_timeseries(stockdays):
     """
-    Merge a sequence of StockDay instances,
-    returning a pandas dataframe.
+    Process a sequence of StockDay instances, loading their stock data
+    into a single DataFrame time series.
     """
-    return pd.concat([s.load() for s in stockdays])
+    df = pd.concat([s.load() for s in stockdays]).sort_values(by = 'Timestamp')
+    df = df.drop_duplicates(subset = 'Timestamp')
+    df.index = pd.to_datetime(df['Timestamp'], unit = 's')
+    del df['Timestamp']
+    return df
     
 def get_ticker_stocks(ticker, prefix = data_prefix):
     """Return a list of StockDay instances for the given stock ticker and data directory prefix"""
     from glob import glob
     paths = glob(prefix + '/%s/*_*csv' % ticker)
-    return map(StockDay, paths)
+    if not paths:
+        raise ValueError("ticker %s: no data found" % ticker)
+    else:
+        return map(StockDay, paths)
+
 
 
 def get_time_series(ticker, start, end):
     def stock_matches(stock):
         return (stock.time > start) and (stock.time < end)
-    merged = merge_stockdays(filter(stock_matches, get_ticker_stocks(ticker)))
+    return stockdays_to_timeseries(filter(stock_matches, get_ticker_stocks(ticker)))
     # TODO: abstraction violation?
-    return merged.drop_duplicates(subset = 'Timestamp')
