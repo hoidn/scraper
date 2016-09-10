@@ -1,4 +1,0 @@
-uri:/instrument/1.0/BXLT/chartdata;type=quote;range=1d/csv
-ticker:bxlt
-errorid:1
-message:Unknown error has happened - symbol: bxlt representation: quote range: 1d

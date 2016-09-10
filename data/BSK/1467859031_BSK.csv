@@ -1,4 +1,0 @@
-uri:/instrument/1.0/BSK/chartdata;type=quote;range=1d/csv
-ticker:bsk
-errorid:1
-message:Unknown error has happened - symbol: bsk representation: quote range: 1d

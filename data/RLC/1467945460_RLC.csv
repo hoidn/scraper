@@ -1,4 +1,0 @@
-uri:/instrument/1.0/RLC/chartdata;type=quote;range=1d/csv
-ticker:rlc
-errorid:1
-message:Unknown error has happened - symbol: rlc representation: quote range: 1d

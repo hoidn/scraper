@@ -1,4 +1,0 @@
-uri:/instrument/1.0/FSIV/chartdata;type=quote;range=1d/csv
-ticker:fsiv
-errorid:1
-message:Unknown error has happened - symbol: fsiv representation: quote range: 1d
