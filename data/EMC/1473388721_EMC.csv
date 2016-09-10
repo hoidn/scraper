@@ -1,0 +1,18 @@
+uri:/instrument/1.0/EMC/chartdata;type=quote;range=1d/csv
+ticker:emc
+Company-Name:** SEE<DVMT>
+Exchange-Name:NYQ
+unit:MIN
+timezone:EDT
+currency:USD
+gmtoffset:-14400
+previous_close:29.0350
+Timestamp:1473168600,1473192000
+labels:1473170400,1473174000,1473177600,1473181200,1473184800,1473188400,1473192000
+values:Timestamp,close,high,low,open,volume
+close:29.0350,29.0350
+high:29.0350,29.0350
+low:29.0350,29.0350
+open:29.0350,29.0350
+volume:78229104,78229104
+1473192000,29.0350,29.0350,29.0350,29.0350,78229104

@@ -1,0 +1,5 @@
+uri:/instrument/1.0/ARG/chartdata;type=quote;range=1d/csv
+ticker:arg
+errorid:1
+message:No data available for given Time Range - symbol: arg representation: quoterange: 1d start: -36764 end: 597139037
+alternate_ranges:,1m,3m,6m,1y,2y,5y,my

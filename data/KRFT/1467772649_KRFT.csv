@@ -1,0 +1,5 @@
+uri:/instrument/1.0/KRFT/chartdata;type=quote;range=1d/csv
+ticker:krft
+errorid:1
+message:No data available for given Time Range - symbol: krft representation: quoterange: 1d start: -36780 end: 597233245
+alternate_ranges:,1m,3m,6m,1y,2y,5y
