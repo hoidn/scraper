@@ -1,5 +1,0 @@
-uri:/instrument/1.0/PCL/chartdata;type=quote;range=1d/csv
-ticker:pcl
-errorid:1
-message:No data available for given Time Range - symbol: pcl representation: quoterange: 1d start: -36764 end: 597266013
-alternate_ranges:,1m,3m,6m,1y,2y,5y,my
